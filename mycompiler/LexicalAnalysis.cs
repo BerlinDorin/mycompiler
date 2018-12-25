@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using mycompiler;
 namespace mycompiler
 {
-    class LexcialAnalysis
+    class LexicalAnalysis
     {
         //SY对应names中的含义
         public  enum SY
@@ -32,7 +32,7 @@ namespace mycompiler
             public String token;      //存放单词字符串
                                       // public int Num;           //存放整数值
                                        // public double Dou;        //存储小数值
-            public int Sym;            //存储当前字符串编码
+            public SY Sym;            //存储当前字符串编码
             public int LineID;        //存储当前字符串所在行
         }
         public struct Error
@@ -41,11 +41,12 @@ namespace mycompiler
             public string token;
         }
 
-        private void init()
+        public LexicalAnalysis()
         {
             Words = new Word[5000];
             errorlist = new Error[5000];
             errorcnt = 0;
+            Wordscnt = 0;
         }
 
         public int pos;
@@ -56,54 +57,59 @@ namespace mycompiler
         public Error[] errorlist;
         public int errorcnt;
 
-
-  
-
         //添加单词表成员
-        private void insert(String s, int sy, int lineID)
+        private void insert(String s, SY sy, int lineID)
         {
             Words[Wordscnt].token = s;
             Words[Wordscnt].Sym = sy;
             Words[Wordscnt].LineID = lineID;
             Wordscnt++;
         }
-        //Judge实现对token进行判断（无符号整数/浮点数/关键字/标识符） 然后存入单词表
+        //Judge实现对token进行判断（无符号整数/关键字/标识符） 然后存入单词表
         private void Judge(String s, int lineID)
         {
             int len = s.Length;
-            int Num;
-            double Dou;
-            bool Numflag = false, Douflag = false;
-            Numflag = int.TryParse(s, out Num);
-            Douflag = double.TryParse(s, out Dou);
+            long Num;
+            bool Numflag = false;//Douflag = false;
+           
+            Numflag = long.TryParse(s, out Num);
+            // Douflag = double.TryParse(s, out Dou);
+            if (Num > int.MaxValue)
+            {
+                errorlist[errorcnt].id = 30;        //这个数太大
+                errorlist[errorcnt].token = s;
+                errorcnt++;
+                insert("0", SY.INTSY, lineID);
+                return;
+            }
 
             if (Numflag == true)        //token为无符号整数
             {
-                insert(s, 34, lineID);
-
+                 insert(s, SY.INTSY, lineID);
             }
-            else if (Douflag == true)    //token为浮点数
-            {
-                insert(s, 35, lineID);
-            }
+            //else if (Douflag == true)    //token为浮点数
+            //{
+            //    insert(s, 35, lineID);
+            //}
             else
             {
                 if (s[0] >= '0' && s[0] <= '9')        //如果token以数字开头且后面出现字母，则报错
                 {
-                    errorlist[errorcnt].id = 1;
+                    errorlist[errorcnt].id = 41;
                     errorlist[errorcnt].token = s;
                     errorcnt++;
                 }
                 else
                 {
-                    int t = reserver(s);         //调用reserver识别token为关键字或者标识符，返回t作为识别码
+                    SY t = reserver(s);         //调用reserver识别token为关键字或者标识符，返回t作为识别码
                     insert(s, t, lineID);
                 }
             }
         }
+        //按行读取单词，调用各类判断函数判断其类型，并调用Insert添加单词
         public void LexAnaly(String s, int lineID)
         {
-            init();
+         
             int len = s.Length;
             String tmp = "";
             bool tokenFlag = true;
@@ -140,10 +146,10 @@ namespace mycompiler
                         tokenFlag = true;
                         tmp = "";
                     }
-                    if (ch == ',') insert(",", 17, lineID);
-                    else if (ch == ';') insert(";", 18, lineID);
-                    else if (ch == '(') insert("(", 19, lineID);
-                    else if (ch == ')') insert(")", 20, lineID);
+                    if (ch == ',') insert(",", SY.COMMASY, lineID);
+                    else if (ch == ';') insert(";", SY.SEMISY, lineID);
+                    else if (ch == '(') insert("(", SY.LPARSY, lineID);
+                    else if (ch == ')') insert(")", SY.RPARSY, lineID);
 
                 }
                 //ch 为"." :
@@ -159,7 +165,7 @@ namespace mycompiler
                             tmp = "";
                         }
 
-                        insert(".", 22, lineID);
+                        insert(".", SY.DOTSY, lineID);
                     }
                     //else if (s[i - 1] >= '0' && s[i - 1] <= '9' && s[i + 1] >= '0' && s[i + 1] <= '9')
                     //{
@@ -168,7 +174,7 @@ namespace mycompiler
                     //}
                     else
                     {
-                        errorlist[errorcnt].id = 2;
+                        errorlist[errorcnt].id = 42;
                         errorlist[errorcnt].token = ".";
                         errorcnt++;
                        
@@ -185,7 +191,7 @@ namespace mycompiler
                         tokenFlag = true;
                         tmp = "";
                     }
-                    int t = isSimpleOperator();
+                    SY t = isSimpleOperator();
                     insert(ch.ToString(), t, lineID);
                 }
                 //ch 为"<",">","<>" :
@@ -201,15 +207,15 @@ namespace mycompiler
                     }
                     if (i > 0 && s[i - 1] == '<' && s[i] == '>')
                     {
-                        insert("<>", 31, lineID);
+                        insert("<>", SY.UNEQUSY, lineID);
                     }
                     else if (i == len - 1 || (s[i + 1] != '=' && (s[i] == '>' || (s[i] == '<' && s[i + 1] != '>'))))
                     {
                         if (ch == '<')
                         {
-                            insert("<", 28, lineID);
+                            insert("<", SY.LESSSY, lineID);
                         }
-                        else insert(">", 29, lineID);
+                        else insert(">", SY.GRTSY, lineID);
                     }
 
 
@@ -227,16 +233,16 @@ namespace mycompiler
                     }
                     if (i > 0 && s[i - 1] == ':')
                     {
-                        insert(":=", 30, lineID);
+                        insert(":=", SY.ASSIGNSY, lineID);
                     }
                     else if (i > 0 && (s[i - 1] == '<' || s[i - 1] == '>'))
                     {
-                        if (s[i - 1] == '<') insert("<=", 32, lineID);
-                        if (s[i - 1] == '>') insert(">=", 33, lineID);
+                        if (s[i - 1] == '<') insert("<=", SY.LESY, lineID);
+                        if (s[i - 1] == '>') insert(">=", SY.GESY, lineID);
                     }
                     else
                     {
-                        insert("=", 27, lineID);
+                        insert("=", SY.EQUSY, lineID);
                     }
                 }
                 //ch =":"
@@ -254,7 +260,7 @@ namespace mycompiler
                     if (i < len - 2 && s[i + 1] == '=') {; }
                     else
                     {
-                        errorlist[errorcnt].id= 3;
+                        errorlist[errorcnt].id= 35;
                         errorlist[errorcnt].token= ":";
                         errorcnt++;
                        
@@ -262,7 +268,7 @@ namespace mycompiler
                 }
                 else
                 {
-                    errorlist[errorcnt].id= 4;
+                    errorlist[errorcnt].id= 43;
                     errorlist[errorcnt].token = ch.ToString();
                     errorcnt++;
                   
@@ -316,13 +322,13 @@ namespace mycompiler
             return ch == '.';
         }
 
-        private int isSimpleOperator()
+        private SY isSimpleOperator()
         {
-            if (ch == '+') return 23;
-            else if (ch == '-') return 24;
-            else if (ch == '*') return 25;
-            else if (ch == '/') return 26;
-            else return 0;
+            if (ch == '+') return SY.PLUSSY;
+            else if (ch == '-') return SY.MINUSSY;
+            else if (ch == '*') return SY.STARSY;
+            else if (ch == '/') return SY.DIVISY;
+            else return SY.DEFAULT;
         }
 
         bool isLpar()
@@ -360,13 +366,14 @@ namespace mycompiler
             return ch == '<';
         }
         //是否为关键字，并且返回识别码
-        private int reserver(string token)
+        private SY reserver(string token)
         {
             for (int i = 1; i <= 16; i++)
             {
-                if (token == names[i]) return i;
+                if (token == names[i]) return (SY)i;
             }
-            return 35;      //不是的话返回的是标识符的识别码
+            return SY.IDSY;      //不是的话返回的是标识符的识别码
         }
     }
 }
+

@@ -44,15 +44,16 @@
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
+            this.skinButton4 = new CCWin.SkinControl.SkinButton();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.LightCyan;
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(27, 65);
+            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(27, 67);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(346, 268);
+            this.richTextBox1.Size = new System.Drawing.Size(397, 340);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -72,11 +73,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(385, 41);
+            this.label2.Location = new System.Drawing.Point(448, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 21);
+            this.label2.Size = new System.Drawing.Size(122, 21);
             this.label2.TabIndex = 4;
-            this.label2.Text = "输出P-Code：";
+            this.label2.Text = "输出目标代码：";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -84,7 +85,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label3.Location = new System.Drawing.Point(23, 336);
+            this.label3.Location = new System.Drawing.Point(23, 410);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 21);
             this.label3.TabIndex = 5;
@@ -97,10 +98,10 @@
             // richTextBox2
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.FloralWhite;
-            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(389, 67);
+            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Location = new System.Drawing.Point(452, 67);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(338, 266);
+            this.richTextBox2.Size = new System.Drawing.Size(275, 340);
             this.richTextBox2.TabIndex = 9;
             this.richTextBox2.Text = "";
             // 
@@ -108,9 +109,9 @@
             // 
             this.richTextBox3.BackColor = System.Drawing.Color.MistyRose;
             this.richTextBox3.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox3.Location = new System.Drawing.Point(27, 360);
+            this.richTextBox3.Location = new System.Drawing.Point(27, 434);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(700, 81);
+            this.richTextBox3.Size = new System.Drawing.Size(700, 163);
             this.richTextBox3.TabIndex = 10;
             this.richTextBox3.Text = "";
             // 
@@ -125,7 +126,7 @@
             this.skinButton1.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.skinButton1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinButton1.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.skinButton1.Location = new System.Drawing.Point(743, 195);
+            this.skinButton1.Location = new System.Drawing.Point(743, 87);
             this.skinButton1.MouseBack = null;
             this.skinButton1.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.skinButton1.Name = "skinButton1";
@@ -146,7 +147,7 @@
             this.skinButton2.DownBack = null;
             this.skinButton2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinButton2.GlowColor = System.Drawing.Color.Lime;
-            this.skinButton2.Location = new System.Drawing.Point(743, 315);
+            this.skinButton2.Location = new System.Drawing.Point(743, 230);
             this.skinButton2.MouseBack = null;
             this.skinButton2.Name = "skinButton2";
             this.skinButton2.NormlBack = null;
@@ -166,13 +167,13 @@
             this.skinButton3.DownBack = null;
             this.skinButton3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinButton3.GlowColor = System.Drawing.Color.Yellow;
-            this.skinButton3.Location = new System.Drawing.Point(743, 438);
+            this.skinButton3.Location = new System.Drawing.Point(743, 501);
             this.skinButton3.MouseBack = null;
             this.skinButton3.Name = "skinButton3";
             this.skinButton3.NormlBack = null;
             this.skinButton3.Size = new System.Drawing.Size(130, 40);
             this.skinButton3.TabIndex = 14;
-            this.skinButton3.Text = "解释";
+            this.skinButton3.Text = "保存目标代码";
             this.skinButton3.UseVisualStyleBackColor = false;
             this.skinButton3.Click += new System.EventHandler(this.skinButton3_Click);
             // 
@@ -180,8 +181,8 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.Color.YellowGreen;
-            this.label4.Location = new System.Drawing.Point(23, 457);
+            this.label4.ForeColor = System.Drawing.Color.SeaGreen;
+            this.label4.Location = new System.Drawing.Point(24, 600);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 21);
             this.label4.TabIndex = 15;
@@ -191,9 +192,9 @@
             // 
             this.richTextBox4.BackColor = System.Drawing.Color.LightYellow;
             this.richTextBox4.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox4.Location = new System.Drawing.Point(27, 481);
+            this.richTextBox4.Location = new System.Drawing.Point(28, 624);
             this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(346, 94);
+            this.richTextBox4.Size = new System.Drawing.Size(346, 45);
             this.richTextBox4.TabIndex = 16;
             this.richTextBox4.Text = "";
             // 
@@ -201,8 +202,8 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.YellowGreen;
-            this.label5.Location = new System.Drawing.Point(385, 457);
+            this.label5.ForeColor = System.Drawing.Color.SeaGreen;
+            this.label5.Location = new System.Drawing.Point(385, 600);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 21);
             this.label5.TabIndex = 17;
@@ -212,11 +213,31 @@
             // 
             this.richTextBox5.BackColor = System.Drawing.Color.LightYellow;
             this.richTextBox5.Font = new System.Drawing.Font("Consolas", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox5.Location = new System.Drawing.Point(389, 481);
+            this.richTextBox5.Location = new System.Drawing.Point(389, 624);
             this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(346, 94);
+            this.richTextBox5.Size = new System.Drawing.Size(346, 45);
             this.richTextBox5.TabIndex = 18;
             this.richTextBox5.Text = "";
+            // 
+            // skinButton4
+            // 
+            this.skinButton4.AutoSize = true;
+            this.skinButton4.BackColor = System.Drawing.Color.Transparent;
+            this.skinButton4.BaseColor = System.Drawing.Color.Aqua;
+            this.skinButton4.BorderColor = System.Drawing.Color.Turquoise;
+            this.skinButton4.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinButton4.DownBack = null;
+            this.skinButton4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinButton4.GlowColor = System.Drawing.Color.MediumTurquoise;
+            this.skinButton4.Location = new System.Drawing.Point(743, 365);
+            this.skinButton4.MouseBack = null;
+            this.skinButton4.Name = "skinButton4";
+            this.skinButton4.NormlBack = null;
+            this.skinButton4.Size = new System.Drawing.Size(130, 42);
+            this.skinButton4.TabIndex = 19;
+            this.skinButton4.Text = "解释运行";
+            this.skinButton4.UseVisualStyleBackColor = false;
+            this.skinButton4.Click += new System.EventHandler(this.skinButton4_Click);
             // 
             // Form1
             // 
@@ -225,7 +246,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Lavender;
             this.CaptionFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ClientSize = new System.Drawing.Size(894, 589);
+            this.ClientSize = new System.Drawing.Size(909, 683);
+            this.Controls.Add(this.skinButton4);
             this.Controls.Add(this.richTextBox5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.richTextBox4);
@@ -242,9 +264,9 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
+            this.MdiImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Name = "Form1";
-            this.Text = "mycompiler";
-            this.TitleCenter = true;
+            this.Text = "PL/0-Compiler by Berlin";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,5 +289,6 @@
         private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox richTextBox5;
+        private CCWin.SkinControl.SkinButton skinButton4;
     }
 }

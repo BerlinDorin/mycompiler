@@ -10,7 +10,7 @@ namespace mycompiler
     {
         public int tablecnt;
 
-        public struct Item
+        public class Item
         {
             public String name;             //记录的名字
             public int type;                //记录的类型,有3种类型：constant(0), variable(1), procedure(2)
@@ -19,50 +19,49 @@ namespace mycompiler
             public int address;             //记录的地址
             public int size;                //需要分配的空间，当记录类型为procedure时使用，默认值为0
         };
-        public Item []table;        //符号表
+        public List<Item> table;        //符号表
 
         public SymbolTable()
         {
             tablecnt = 0;
-            table = new Item[100];
+            table = new List<Item>();
+            table.Add(new Item());
             
         }
 
-        /*向符号表中添加一条记录*/
-        public void tableFill(String name, int type, int value, int level, int dx)
-        {   
+        //向符号表中添加一条记录
+        public void TableFill(String name, int type, int value, int level, int dx)
+        {
+            if (tablecnt + 1 < table.Count) table.RemoveRange(tablecnt+1,table.Count-tablecnt-1);        //删去不需要的
+
+            tablecnt++;
             Item tmp=new Item();            
             tmp.name = name;
             tmp.type = type;
             tmp.value = value;
             tmp.level = level;
             tmp.address = dx;
-            table[tablecnt] = tmp;
-            tablecnt++;
-        }
-
-
-        /*查找标识符在符号表中的位置*/
-        public int locate(string name)
-        {
+            table.Add(tmp);
            
-            for (int i = tablecnt - 1; i >= 0; i--)
+        }
+        //查找标识符在符号表中的位置
+        public int Position(string name)
+        {
+          
+            for (int i=tablecnt ; i > 0; i--)
             {
-                if (table[i].name == name)
+                if (table[i].name== name)
                     return i;
             }
             return -1;
         }
-
-        public void setAddr(int addr, int pos)
+        //设置记录表项的地址（Addr）
+        public void SetAddr(int addr, int pos)
         {
             Item temp = table[pos];
             temp.address = addr;
             table[pos] = temp;
         }
-
-
-
 
     }
 }

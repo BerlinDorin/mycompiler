@@ -18,7 +18,7 @@ namespace mycompiler
             "04. const，var，procedure 后应是标识符",
             "05. 漏掉了\",\"或\";\"",
             "06. 过程说明后的符号不正确（应是语句开始符或过程定义符）",
-            "07. 声明顺序有误，应为[<变量说明部分>][<常量说明部分>] [<过程说明部分>]<语句>",
+            "07. 应为语句开始符号",
             "08. 程序体内语句部分后的符号不正确",
             "09. 程序结尾丢了句号\".\"",
             "10. 语句之间漏了\";",
@@ -38,21 +38,24 @@ namespace mycompiler
             "24. 表达式不能以此符号开始",
             //补充部分
             "25. 不存在的操作符",
-            "26. 变量定义重复",
-            "27. 未找到对应过程名",
-            "28. 不支持过程的判断",
-            "29. 缺少标识符，无法进行条件判断",
+            "26. 结束符只能出现在程序结尾",
+            "27. 不能在变量声明语句中尝试给变量赋值",
+            "28. ",
+            "29. ",
             "30. 这个数太大",
             "31. read括号内应该是变量标识符",
-            "32. 此处不应该出现过程说明标识符",
+            "32. ",
             "33. 缺少until",
-            "34. 此处应该为标识符",
-            "35. 常量说明部分出现在错误位置",
-            "36. 常量说明部分多于一个",
+            "34. ",
+            "35. \":\"需要和\"=\"一起使用给变量赋值",
+            "36. ",
             "37. ",
             "38. ",
             "39. ",
-            "40. 应为左括号"
+            "40. 应为左括号",
+            "41. 标识符不能以数字开头",
+            "42. 结束符出现在了不适当的地方",
+            "43. 输入了无法被识别的符号"
         };
         private string errorMessage;
         private int errorcount;
@@ -65,10 +68,10 @@ namespace mycompiler
         public string ErrorMessage { get => errorMessage; set => errorMessage = value; }
         public int Errorcount { get => errorcount; set => errorcount = value; }
 
-        public void AddError(int line,int errorid)
+        public void AddError(int errorid,int line,string errorword)
         {
-            errorMessage += "Line:" + line + "错误信息: " + Errorlist[errorid] + "\r\n";
             errorcount++;
+            errorMessage += errorcount.ToString()+".  Line" + line.ToString() +":  字符 "+errorword+ "\t  错误信息 : " + Errorlist[errorid] + "\r\n";
         }
     }
 }

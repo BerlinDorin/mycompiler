@@ -1,0 +1,11 @@
+const a=21,flag=4;
+var b,c,d;
+begin       
+               b:=7;
+               write(a+b);
+      repeat 
+             b:=b-1;
+             if b>flag then write(b);
+            else write(flag);
+      until b<0;
+end.
